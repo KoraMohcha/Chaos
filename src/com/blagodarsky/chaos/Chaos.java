@@ -1,5 +1,8 @@
 package com.blagodarsky.chaos;
 
+import com.blagodarsky.chaos.commands.CommandGetBook;
+import com.blagodarsky.chaos.events.*;
+import com.blagodarsky.chaos.utils.KillersBook;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
@@ -7,22 +10,9 @@ import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import com.blagodarsky.chaos.events.BeautifulExplosions;
-import com.blagodarsky.chaos.events.BookToKill;
-import com.blagodarsky.chaos.events.CaptureWand;
-import com.blagodarsky.chaos.events.HeadCutter;
-import com.blagodarsky.chaos.events.Helper;
-import com.blagodarsky.chaos.events.InfiniteMobs;
-import com.blagodarsky.chaos.events.InfiniteResours;
-import com.blagodarsky.chaos.events.InvisibleMobs;
-import com.blagodarsky.chaos.events.SpawnerKeeper;
-import com.blagodarsky.chaos.events.SpawningNewCreatuares;
-import com.blagodarsky.chaos.events.WitherSword;
-
 public class Chaos extends JavaPlugin
 {
 	public static Chaos plugin;
-	public static ItemStack deathNote;
 	public static ItemStack Capture_wand;
 	public void onEnable ()
 	{
@@ -38,12 +28,8 @@ public class Chaos extends JavaPlugin
 		getServer().getPluginManager().registerEvents(new InvisibleMobs(), plugin);
 		getServer().getPluginManager().registerEvents(new SpawnerKeeper(), plugin);
 		getServer().getPluginManager().registerEvents(new Helper(), plugin);
-		
-		deathNote = new ItemStack(Material.WRITABLE_BOOK);
-		ItemMeta meta = deathNote.getItemMeta();
-		meta.setDisplayName(ChatColor.UNDERLINE +"" + ChatColor.RED + "☠...Death Note...☠");
-		deathNote.setItemMeta(meta);
-		ShapedRecipe recipt = new ShapedRecipe(deathNote);
+		getCommand("getbook").setExecutor(new CommandGetBook());
+		ShapedRecipe recipt = new ShapedRecipe(new KillersBook(null).getBook());
 		recipt.shape("+-+",
 					 "-B-",
 					 "+-+");

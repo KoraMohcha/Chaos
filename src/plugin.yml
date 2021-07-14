@@ -2,3 +2,8 @@ name: Chaos
 main: com.blagodarsky.chaos.Chaos
 version: 1.0
 api-version: 1.13
+commands:
+  getbook:
+    description: It gives you the Death Note.
+    permission: Chaos.Admin
+    permission-message: You are not admin!
